@@ -1,0 +1,18 @@
+.content
+  .container
+    .col-md-4.col-md-offset-4
+      .l_g_r.biography-into
+        .dapibus
+          h2
+            = gettext("Edit your profile")
+          = form_for @changeset, user_path(@conn, :update, @user), fn f ->
+            .form-group
+              = text_input f, :first_name, placeholder: gettext("First name"), value: @user.first_name, class: "form-control input-lg"
+              = error_tag f, :first_name
+            .form-group.form-group-shadow
+              = text_input f, :last_name, placeholder: gettext("Last name"), value: @user.last_name, class: "form-control input-lg"
+              = error_tag f, :last_name
+            .form-group.form-group-shadow
+              = multiple_select f, :skill_ids, Enum.map(@skills, &{&1.name, &1.id})
+            .form-group.form-group-shadow
+              = submit gettext("Edit"), class: "btn btn-info btn-block btn-lg"

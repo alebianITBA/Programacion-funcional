@@ -1,0 +1,19 @@
+.content
+  .container
+    .row.grid-row
+
+      = for user <- @users do
+        .grid-item.praesent.center.biography-into
+          .l_g_r
+            .dapibus
+              a href="#{user_path(@conn, :show, user)}"
+                img.user-image src="#{Connecton.User.gravatar(user)}"
+              .caption
+                h3
+                  = link Connecton.User.full_name(user), to: user_path(@conn, :show, user)
+                p.center
+                  = link user.email, to: user_path(@conn, :show, user)
+
+                p.skill-container
+                  = for skill <- user.skills do
+                    = render Connecton.SkillView, "_skill.html", skill: skill

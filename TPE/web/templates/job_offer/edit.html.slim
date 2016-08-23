@@ -1,0 +1,18 @@
+.content
+  .container
+    .col-md-12.praesent.f-left
+      .l_g_r.biography-into
+        .dapibus
+          h2
+            = gettext("Edit your offer")
+          = form_for @changeset, job_offer_path(@conn, :update, @offer), fn f ->
+            .form-group
+              = text_input f, :title, placeholder: gettext("First name"), value: @offer.title, class: "form-control input-lg"
+              = error_tag f, :title
+            .form-group.form-group-shadow
+              = text_input f, :description, placeholder: gettext("Last name"), value: @offer.description, class: "form-control input-lg post-textarea"
+              = error_tag f, :description
+            .form-group.form-group-shadow
+              = multiple_select f, :skill_ids, Enum.map(@skills, &{&1.name, &1.id})
+            .form-group.form-group-shadow
+              = submit gettext("Edit"), class: "btn btn-info btn-block btn-lg"

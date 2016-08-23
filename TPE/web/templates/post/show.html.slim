@@ -1,0 +1,23 @@
+.content
+  .container
+    .col-md-12.praesent.f-left
+      .l_g_r.b-margin
+        .dapibus.biography-into
+          h4
+            = @post.title
+          p.adm
+            = gettext("Posted by ")
+            = link Connecton.User.full_name(@post.user), to: user_path(@conn, :show, @post.user), class: "no-underline"
+          p
+            = @post.description
+          .apply-button
+            = if @post.user_id == @current_user.id do
+              .btn-group
+                button.btn.btn-info.btn-xs.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  = gettext("Action")
+                  span.caret
+                ul.dropdown-menu.dropdown-menu-right
+                  li
+                    = link gettext("Edit"), to: post_path(@conn, :edit, @post)
+                  li
+                    = link gettext("Delete"), to: post_path(@conn, :delete, @post), method: :delete

@@ -1,0 +1,25 @@
+.container-fluid
+  .row.register-background style="background-image: url('/images/register-background.jpg');"
+    .col-md-4.col-md-offset-4
+      .register-panel
+        h3.form-title.text-center.white-text
+          = gettext("Get started")
+
+        = form_for @changeset, user_path(@conn, :create), fn f ->
+          .form-group.form-group-shadow
+            = text_input f, :first_name, placeholder: "#{gettext("First name")}*", class: "form-control input-lg"
+            = error_tag f, :first_name
+          .form-group.form-group-shadow
+            = text_input f, :last_name, placeholder: "#{gettext("Last name")}*", class: "form-control input-lg"
+            = error_tag f, :last_name
+          .form-group.form-group-shadow
+            = text_input f, :email, placeholder: "#{gettext("Email")}*", class: "form-control input-lg"
+            = error_tag f, :email
+          .form-group.form-group-shadow
+            = password_input f, :password, placeholder: "#{gettext("Password")}*", class: "form-control input-lg"
+            = error_tag f, :password
+          .form-group.form-group-shadow
+            = password_input f, :password_confirmation, placeholder: "#{gettext("Password confirmation")}*", class: "form-control input-lg"
+            = error_tag f, :password_confirmation
+          .form-group.form-group-shadow
+            = submit gettext("Register"), class: "btn btn-info btn-block btn-lg"

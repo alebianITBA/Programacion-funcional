@@ -1,0 +1,177 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/page/index.html.slim:1
+msgid "Register"
+msgstr ""
+
+#: web/templates/job_offer/edit.html.slim:1 web/templates/page/index.html.slim:1
+#: web/templates/post/edit.html.slim:1 web/templates/user/edit.html.slim:1
+msgid "First name"
+msgstr ""
+
+#: web/templates/page/404.html.slim:1
+msgid "Not found"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1 web/templates/page/index.html.slim:1
+msgid "Email"
+msgstr ""
+
+#: web/templates/job_offer/edit.html.slim:1 web/templates/page/index.html.slim:1
+#: web/templates/post/edit.html.slim:1 web/templates/user/edit.html.slim:1
+msgid "Last name"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1 web/templates/page/index.html.slim:1
+msgid "Password"
+msgstr ""
+
+#: web/templates/page/index.html.slim:1
+msgid "Password confirmation"
+msgstr ""
+
+#: web/templates/job_offer/index.html.slim:1
+#: web/templates/post/index.html.slim:1
+msgid "Description"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1
+msgid "Job offers"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1
+msgid "Log out"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1
+msgid "Login"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1
+msgid "My profile"
+msgstr ""
+
+#: web/templates/job_offer/index.html.slim:1
+#: web/templates/post/index.html.slim:1
+msgid "Post"
+msgstr ""
+
+#: web/templates/post/index.html.slim:1 web/templates/post/index.html.slim:1
+#: web/templates/post/show.html.slim:1 web/templates/user/show.html.slim:1
+msgid "Posted by "
+msgstr ""
+
+#: web/templates/post/index.html.slim:1
+msgid "Share a post"
+msgstr ""
+
+#: web/templates/job_offer/index.html.slim:1
+#: web/templates/post/index.html.slim:1
+msgid "Title"
+msgstr ""
+
+#: web/templates/layout/app.html.slim:1
+msgid "Users"
+msgstr ""
+
+#: web/templates/job_offer/index.html.slim:1
+#: web/templates/job_offer/show.html.slim:1 web/templates/post/index.html.slim:1
+msgid "Apply"
+msgstr ""
+
+#: web/templates/post/index.html.slim:1
+msgid "Recommended offers"
+msgstr ""
+
+#: web/templates/job_offer/show.html.slim:1 web/templates/post/index.html.slim:1
+#: web/templates/post/show.html.slim:1 web/templates/user/show.html.slim:1
+#: web/templates/user/show.html.slim:1 web/templates/user/show.html.slim:1
+msgid "Action"
+msgstr ""
+
+#: web/templates/job_offer/show.html.slim:1 web/templates/user/show.html.slim:1
+msgid "Activate"
+msgstr ""
+
+#: web/templates/user/show.html.slim:1
+msgid "Active"
+msgstr ""
+
+#: web/templates/job_offer/show.html.slim:1 web/templates/user/show.html.slim:1
+msgid "Close"
+msgstr ""
+
+#: web/templates/user/show.html.slim:1
+msgid "Closed"
+msgstr ""
+
+#: web/templates/job_offer/show.html.slim:1 web/templates/post/index.html.slim:1
+#: web/templates/post/show.html.slim:1 web/templates/user/show.html.slim:1
+#: web/templates/user/show.html.slim:1 web/templates/user/show.html.slim:1
+msgid "Delete"
+msgstr ""
+
+#: web/templates/job_offer/edit.html.slim:1
+#: web/templates/job_offer/index.html.slim:1
+#: web/templates/job_offer/show.html.slim:1 web/templates/post/edit.html.slim:1
+#: web/templates/post/index.html.slim:1 web/templates/post/show.html.slim:1
+#: web/templates/user/edit.html.slim:1 web/templates/user/show.html.slim:1
+#: web/templates/user/show.html.slim:1 web/templates/user/show.html.slim:1
+#: web/templates/user/show.html.slim:1
+msgid "Edit"
+msgstr ""
+
+#: web/templates/job_offer/edit.html.slim:1
+msgid "Edit your offer"
+msgstr ""
+
+#: web/templates/post/edit.html.slim:1
+msgid "Edit your post"
+msgstr ""
+
+#: web/templates/user/edit.html.slim:1
+msgid "Edit your profile"
+msgstr ""
+
+#: web/templates/job_offer/index.html.slim:1
+msgid "Filter"
+msgstr ""
+
+#: web/templates/page/index.html.slim:1
+msgid "Get started"
+msgstr ""
+
+#: web/templates/user/show.html.slim:1
+msgid "Job applications"
+msgstr ""
+
+#: web/templates/user/show.html.slim:1
+msgid "Job offers created"
+msgstr ""
+
+#: web/templates/job_offer/index.html.slim:1
+msgid "Need to hire?"
+msgstr ""
+
+#: web/templates/user/show.html.slim:1
+msgid "Recent posts"
+msgstr ""
+
+#: web/templates/job_offer/show.html.slim:1
+msgid "Applications"
+msgstr ""
+
+#: web/templates/job_offer/show.html.slim:1
+msgid "applications"
+msgstr ""

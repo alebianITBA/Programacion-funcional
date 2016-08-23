@@ -1,0 +1,61 @@
+.content
+  .container
+    .col-md-8.praesent
+      .l_g_r.biography-into
+        .dapibus
+          h4
+            = gettext("Share a post")
+          = form_for @changeset, post_path(@conn, :create), fn f ->
+            .form-group
+              = text_input f, :title, placeholder: "#{gettext("Title")}*", class: "form-control input-lg"
+              = error_tag f, :title
+            .form-group.form-group-shadow
+              = text_input f, :description, placeholder: "#{gettext("Description")}*", class: "form-control input-lg post-textarea"
+              = error_tag f, :description
+            .form-group.form-group-shadow
+              = submit "#{gettext("Post")}", class: "btn btn-info btn-block btn-lg"
+
+          = for post <- @posts do
+            hr
+            h4
+              = link post.title, to: post_path(@conn, :show, post), class: "no-underline"
+            p.adm
+              = gettext("Posted by ")
+              = link Connecton.User.full_name(post.user), to: user_path(@conn, :show, post.user), class: "no-underline"
+            p
+              = post.description
+            .apply-button
+              = if post.user_id == @current_user.id do
+                .btn-group
+                  button.btn.btn-info.btn-xs.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    = gettext("Action")
+                    span.caret
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      = link gettext("Edit"), to: post_path(@conn, :edit, post)
+                    li
+                      = link gettext("Delete"), to: post_path(@conn, :delete, post), method: :delete
+
+        .row.center
+           #pagination data-value=""
+
+
+    = if assigns[:offers] do
+      .col-md-4.praesent
+        .l_g_r.biography-into
+          .dapibus
+            h4
+              = gettext("Recommended offers")
+            = for offer <- @offers do
+              hr
+              h4
+                = link offer.title, to: job_offer_path(@conn, :show, offer)
+              p.adm
+                = gettext("Posted by ")
+                = link Connecton.User.full_name(offer.user), to: user_path(@conn, :show, offer.user), class: "no-underline"
+              p
+                = offer.description
+              p.skill-container
+                = for skill <- offer.skills do
+                  = render Connecton.SkillView, "_skill.html", skill: skill
+              = Phoenix.HTML.Link.button gettext("Apply"), to: job_offer_job_application_path(@conn, :apply_from_posts, offer), class: "button btn btn-info btn-block btn-lg"

@@ -1,0 +1,55 @@
+.content
+  .container
+    .col-md-8.praesent
+      .l_g_r.biography-into
+        .dapibus
+          = for offer <- @offers do
+            .media
+              .media-left
+                a href="#{user_path(@conn, :show, offer.user)}"
+                  img.user-placeholder src="#{Connecton.User.gravatar(offer.user)}"
+              .media-body
+                h4
+                  = link offer.title, to: job_offer_path(@conn, :show, offer)
+                p
+                  = offer.description
+                = for skill <- offer.skills do
+                  = render Connecton.SkillView, "_skill.html", skill: skill
+            div
+              .apply-button
+                = if offer.user.id == @current_user.id do
+                  = Phoenix.HTML.Link.button gettext("Edit"), to: job_offer_path(@conn, :edit, offer), class: "btn btn-primary", method: :get
+                = if offer.user.id != @current_user.id do
+                  = Phoenix.HTML.Link.button gettext("Apply"), to: job_offer_job_application_path(@conn, :apply_from_posts, offer), class: "btn btn-info"
+            hr
+
+        .l_g_r.biography-into.center
+          .row
+            #pagination
+
+    .col-md-4.praesent
+      .l_g_r.b-margin
+        .dapibus.biography-into
+          .input-group.b-margin
+            select.form-control.input-lg id="skills-select-filter" name="skills-filter"
+              = for skill <- @skills do
+                option value="#{skill.id}"
+                  = skill.name
+          button.btn.btn-info.btn-block.btn-lg.form-control id="filter-offers"
+            = gettext("Filter")
+
+      .l_g_r
+        .dapibus.biography-into
+          h4
+            = gettext("Need to hire?")
+          = form_for @changeset, job_offer_path(@conn, :create), fn f ->
+            .form-group
+              = text_input f, :title, placeholder: "#{gettext("Title")}*", class: "form-control input-lg"
+              = error_tag f, :title
+            .form-group.form-group-shadow
+              = text_input f, :description, placeholder: "#{gettext("Description")}*", class: "form-control input-lg post-textarea"
+              = error_tag f, :description
+            .form-group.form-group-shadow
+              = multiple_select f, :skill_ids, Enum.map(@skills, &{&1.name, &1.id})
+            .form-group.form-group-shadow
+              = submit "#{gettext("Post")}", class: "btn btn-info btn-block btn-lg"

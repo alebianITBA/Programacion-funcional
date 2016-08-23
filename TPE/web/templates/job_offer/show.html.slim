@@ -1,0 +1,66 @@
+.content
+  .container
+    .col-md-3.praesent
+      .l_g_r
+        .dapibus.biography-into.center
+          a href="#{user_path(@conn, :show, @offer.user)}"
+            img.user-placeholder src="#{Connecton.User.gravatar(@offer.user)}"
+            h4
+              = Connecton.User.full_name(@offer.user)
+            p.center
+              = @offer.user.email
+          = if @offer.user.id == @current_user.id do
+            h3
+              span.label.label-info
+               = "#{Enum.count(@applications)} #{gettext("applications")}"
+
+    .col-md-9.praesent
+      .l_g_r.b-margin
+        .dapibus.biography-into
+          div
+            = if @offer.user.id == @current_user.id do
+              .btn-group.top-right-edit-button
+                button.btn.btn-info.btn-xs.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  = gettext("Action")
+                  span.caret
+                ul.dropdown-menu.dropdown-menu-right
+                  li
+                    = link gettext("Edit"), to: job_offer_path(@conn, :edit, @offer)
+                  li
+                    = link gettext("Delete"), to: job_offer_path(@conn, :delete, @offer), method: :delete
+                  li
+                    = if @offer.closed_at do
+                      = link gettext("Activate"), to: job_offer_job_offer_path(@conn, :activate, @offer), method: :post
+                    = if @offer.closed_at == nil do
+                      = link gettext("Close"), to: job_offer_job_offer_path(@conn, :close, @offer), method: :post
+
+          h2.media-heading
+            = @offer.title
+          p
+            = @offer.description
+          h3
+            = for skill <- @offer.skills do
+              = render Connecton.SkillView, "_skill.html", skill: skill
+
+      = if @offer.user.id == @current_user.id do
+        .l_g_r
+          .dapibus.biography-into
+            h2.media-headingApplications
+              = gettext("Applications")
+            = for application <- @applications do
+              .media
+                .media-left
+                  a href="#{user_path(@conn, :show, application.user)}"
+                    img.user-placeholder src="#{Connecton.User.gravatar(application.user)}"
+                .media-body
+                  h3.media-heading
+                    = Connecton.User.full_name(application.user)
+                  h4.media-heading
+                    = application.user.email
+                  = for skill <- application.user.skills do
+                    = render Connecton.SkillView, "_skill.html", skill: skill
+
+      = if @offer.user.id != @current_user.id do
+        .l_g_r
+          .dapibus.biography-into
+            = Phoenix.HTML.Link.button gettext("Apply"), to: job_offer_job_application_path(@conn, :apply_from_posts, @offer), class: "button btn btn-info btn-block btn-lg"

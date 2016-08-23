@@ -1,0 +1,111 @@
+.content
+  .container
+    .row
+      .col-md-4.praesent
+        .l_g_r.biography-into
+          .dapibus.center
+            img.user-image src="#{Connecton.User.gravatar(@user)}"
+            #info-user style="display: block;"
+              div
+                h2.center
+                  = Connecton.User.full_name(@user)
+              div
+                h3
+                  = @user.email
+              div
+                = for skill <- @user.skills do
+                  = render Connecton.SkillView, "_skill.html", skill: skill
+
+                = if @user.id == @current_user.id do
+                  button.btn.btn-xs.btn-info.top-right-edit-button.edit-button type="button"
+                    = gettext("Edit")
+                hr
+                = if @user.id == @current_user.id do
+                  = button gettext("Edit"), to: user_path(@conn, :edit, @user), method: :get, class: "btn btn-info"
+
+      .col-md-8.praesent
+        = if assigns[:posts] do
+          .biography-into.praesent
+            .dapibus
+              h3
+                = gettext("Recent posts")
+              = for post <- @posts do
+                hr
+                .media
+                  .media-body
+                    h4
+                      = link post.title, to: post_path(@conn, :show, post), class: "no-underline"
+                    p
+                      = post.description
+                .apply-button
+                  = if @user.id == @current_user.id do
+                    .btn-group
+                      button.btn.btn-info.btn-xs.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        = gettext("Action")
+                        span.caret
+                      ul.dropdown-menu.dropdown-menu-right
+                        li
+                          = link gettext("Edit"), to: post_path(@conn, :edit, post)
+                        li
+                          = link gettext("Delete"), to: post_path(@conn, :delete, post), method: :delete
+
+        = if assigns[:offers] do
+          .biography-into.praesent
+            .dapibus
+              h3
+                = gettext("Job offers created")
+              = for offer <- @offers do
+                hr
+                .media
+                  .media-body
+                    h4
+                      = if offer.closed_at do
+                        span data-toggle="tooltip" data-placement="top" title='#{gettext("Closed")}'
+                          img src="/images/off.png"
+                      = if offer.closed_at == nil do
+                        span data-toggle="tooltip" data-placement="top" title='#{gettext("Active")}'
+                          img src="/images/on.png"
+                      = link offer.title, to: job_offer_path(@conn, :show, offer), class: "no-underline"
+                    p
+                      = offer.description
+                    = for skill <- offer.skills do
+                      = render Connecton.SkillView, "_skill.html", skill: skill
+                .apply-button
+                  = if @user.id == @current_user.id do
+                    .btn-group
+                      button.btn.btn-info.btn-xs.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        = gettext("Action")
+                        span.caret
+                      ul.dropdown-menu.dropdown-menu-right
+                        li
+                          = link gettext("Edit"), to: job_offer_path(@conn, :edit, offer)
+                        li
+                          = link gettext("Delete"), to: job_offer_path(@conn, :delete, offer), method: :delete
+                        li
+                          = if offer.closed_at do
+                            = link gettext("Activate"), to: job_offer_job_offer_path(@conn, :activate, offer), method: :post
+                          = if offer.closed_at == nil do
+                            = link gettext("Close"), to: job_offer_job_offer_path(@conn, :close, offer), method: :post
+
+        = if assigns[:applications] && @user.id == @current_user.id do
+          .biography-into.praesent
+            .dapibus
+              h3
+                = gettext("Job applications")
+              = for application <- @applications do
+                hr
+                .media
+                  .media-body
+                    h4
+                      = link application.job_offer.title, to: job_offer_path(@conn, :show, application.job_offer), class: "no-underline"
+                    p
+                      = gettext("Posted by ")
+                      = Connecton.User.full_name(application.job_offer.user)
+                .apply-button
+                  .btn-group
+                    button.btn.btn-info.btn-xs.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                      = gettext("Action")
+                      span.caret
+                    ul.dropdown-menu.dropdown-menu-right
+                      li
+                        = link gettext("Delete"), to: job_application_path(@conn, :delete, application), method: :delete
